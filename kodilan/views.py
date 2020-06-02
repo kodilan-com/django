@@ -1,6 +1,6 @@
-from .models import Post, Company
+from .models import Post, Company, Tag
 from rest_framework import viewsets
-from .serializers import PostSerializer, CompanySerializer
+from .serializers import PostSerializer, CompanySerializer, TagSerializer
 from datetime import timedelta, datetime
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -19,6 +19,14 @@ class CompaniesView(ListAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name']
     ordering_fields = ['id', 'name', 'created_at']
+    pagination_class = StandardResultsSetPagination
+
+
+class TagsView(ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
     pagination_class = StandardResultsSetPagination
 
 

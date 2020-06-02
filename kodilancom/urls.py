@@ -23,6 +23,7 @@ router.register(r'posts', views.PostViewSet)
 # router.register(r'locations', views.FindLocationAction)
 
 urlpatterns = [
+    path('tags/', views.TagsView.as_view()),
     path('companies/', views.CompaniesView.as_view()),
     path('locations/', views.FindLocationAction.as_view()),
     path('', include(router.urls)),
