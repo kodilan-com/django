@@ -1,10 +1,24 @@
-from .models import Post
+from .models import Post, Company
 from rest_framework import viewsets
-from .serializers import PostSerializer
+from .serializers import PostSerializer, CompanySerializer
 from datetime import timedelta, datetime
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework import filters
+from rest_framework import pagination
 
+class StandardResultsSetPagination(pagination.PageNumberPagination):       
+       page_size = 20
+
+class CompaniesView(ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['id', 'name', 'created_at']
+    pagination_class = StandardResultsSetPagination
+    
 
 class FindLocationAction(APIView):
     def get(self, request):
