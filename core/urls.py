@@ -19,7 +19,7 @@ from rest_framework import routers
 from kodilan import views
 
 router = routers.DefaultRouter()
-router.register(r'posts', views.PostViewSet)
+router.register(r'posts', views.PostsView)
 # router.register(r'locations', views.FindLocationAction)
 
 urlpatterns = [
