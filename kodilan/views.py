@@ -8,8 +8,10 @@ from rest_framework.generics import ListAPIView
 from rest_framework import filters
 from rest_framework import pagination
 
-class StandardResultsSetPagination(pagination.PageNumberPagination):       
-       page_size = 20
+
+class StandardResultsSetPagination(pagination.PageNumberPagination):
+    page_size = 20
+
 
 class CompaniesView(ListAPIView):
     queryset = Company.objects.all()
@@ -18,7 +20,7 @@ class CompaniesView(ListAPIView):
     search_fields = ['name']
     ordering_fields = ['id', 'name', 'created_at']
     pagination_class = StandardResultsSetPagination
-    
+
 
 class FindLocationAction(APIView):
     def get(self, request):
