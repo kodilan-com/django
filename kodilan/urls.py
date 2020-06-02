@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from kodilan import views
+from posts import views
 
 router = routers.DefaultRouter()
 router.register(r'posts', views.PostsView)
