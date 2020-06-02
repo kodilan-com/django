@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('kodilan', '0005_auto_20200601_1909'),
+        ('posts', '0005_auto_20200601_1909'),
     ]
 
     operations = [

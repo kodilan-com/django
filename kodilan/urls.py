@@ -19,12 +19,11 @@ from rest_framework import routers
 from posts import views
 
 router = routers.DefaultRouter()
-router.register(r'posts', views.PostsView)
-# router.register(r'locations', views.FindLocationAction)
 
 urlpatterns = [
     path('tags/', views.TagsView.as_view()),
     path('companies/', views.CompaniesView.as_view()),
+    path('posts/', views.PostsView.as_view()),
     path('locations/', views.FindLocationAction.as_view()),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),

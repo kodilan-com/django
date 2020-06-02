@@ -22,9 +22,8 @@ class PostsView(ListAPIView):
     filter_backends = [StatusFilterBackend, PeriodFilterBackend, DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
 
-    search_fields = ['is_featured', 'location', 'type', 'position', 'title', 'tags']
+    search_fields = ['is_featured', 'location', 'type', 'position', 'tags']
     ordering_fields = ['pub_date', 'created_at']
-    filterset_fields = ['category', 'is_finish']
 
 
 class CreatePostsView(CreateAPIView):

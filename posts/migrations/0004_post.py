@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('kodilan', '0003_auto_20200601_1853'),
+        ('posts', '0003_auto_20200601_1853'),
     ]
 
     operations = [
@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
                 ('notes', models.TextField()),
                 ('pub_date', models.DateTimeField()),
                 ('created_at', models.DateTimeField()),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='kodilan.Company')),
-                ('tags', models.ManyToManyField(to='kodilan.Tag')),
+                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='posts.Company')),
+                ('tags', models.ManyToManyField(to='posts.Tag')),
             ],
         ),
     ]
