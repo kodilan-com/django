@@ -12,8 +12,8 @@ class Company(models.Model):
     www = models.URLField()
     twitter = models.CharField(max_length=15)
     linkedin = models.URLField()
-    pub_date = models.DateTimeField()
-    created_at = models.DateTimeField()
+    pub_date = models.DateTimeField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -22,7 +22,7 @@ class Company(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(null=True, blank=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -60,7 +60,7 @@ class Post(models.Model):
     renewal_code = models.CharField(max_length=200, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     pub_date = models.DateTimeField(null=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.company.name + ' > ' + self.position

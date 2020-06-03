@@ -24,6 +24,7 @@ urlpatterns = [
     path('tags/', views.TagsView.as_view()),
     path('companies/', views.CompaniesView.as_view()),
     path('posts/', views.PostsView.as_view()),
+    path('posts/add', views.CreatePostsView.as_view()),
     path('locations/', views.FindLocationAction.as_view()),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
