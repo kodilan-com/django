@@ -2,6 +2,7 @@ from .models import Post, Company, Tag
 from rest_framework import serializers
 from django.template.defaultfilters import slugify
 from kodilan.mail import send_activation
+from django.db import IntegrityError
 import secrets
 
 
@@ -63,7 +64,11 @@ class PostSerializer(serializers.ModelSerializer):
 
         for item in tags_serializer:
             tags_slug = slugify(item['name'])
-            tag = Tag.objects.get_or_create(slug=tags_slug, **item)
+            try:
+                tag = Tag.objects.create(slug=tags_slug, **item)
+            except IntegrityError:
+                tag = Tag.objects.get(name=item['name'])
+
             post.tags.add(tag)
 
         send_activation(validated_data['apply_email'], company_serializer['name'], token)
