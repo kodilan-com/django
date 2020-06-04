@@ -4,7 +4,8 @@ from .models import Company, Post, Tag
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'position', 'detail', 'location', 'status', 'pub_date')
+    list_display = ('id', 'slug', 'position', 'detail', 'location', 'status', 'pub_date')
+    list_filter = ('status', 'position')
 
 
 admin.site.register(Company)

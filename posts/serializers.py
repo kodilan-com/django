@@ -1,6 +1,8 @@
 from .models import Post, Company, Tag
 from rest_framework import serializers
 from django.template.defaultfilters import slugify
+from kodilan.mail import send_activation
+import secrets
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
@@ -25,7 +27,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ['name', 'slug']
 
 
-class CreatePostSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(read_only=True)
     pub_date = serializers.CharField(read_only=True)
     status = serializers.CharField(read_only=True)
@@ -37,8 +39,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
     type = serializers.ChoiceField(required=True, choices=Post.TypeEnum)
 
     company = CompanySerializer()
-
-    tags = TagSerializer(many=True)
+    tags = TagSerializer(many=True, required=False)
 
     class Meta:
         model = Post
@@ -51,24 +52,20 @@ class CreatePostSerializer(serializers.ModelSerializer):
         company_slug = slugify(company_serializer['name'])
         validated_data['company'] = Company.objects.create(slug=company_slug, **company_serializer)
 
-        tags_serializer = validated_data['tags']
-        del validated_data['tags']
+        tags_serializer = []
+        if 'tags' in validated_data:
+            tags_serializer = validated_data['tags']
+            del validated_data['tags']
 
-        slug = slugify("%s-%s" % ("company", validated_data['position']))
-        post = Post.objects.create(status=0, slug=slug, **validated_data)
+        slug = slugify("%s-%s" % (company_slug, validated_data['position']))
+        token = secrets.token_urlsafe(24)
+        post = Post.objects.create(status=0, slug=slug, activation_code=token, **validated_data)
+
         for item in tags_serializer:
             tags_slug = slugify(item['name'])
-            tag = Tag.objects.create(slug=tags_slug, **item)
+            tag = Tag.objects.get_or_create(slug=tags_slug, **item)
             post.tags.add(tag)
-        # todo mail gönderimi yapıalcak
+
+        send_activation(validated_data['apply_email'], company_serializer['name'], token)
+
         return post
-
-
-class PostSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
-    company = CompanySerializer()
-
-    class Meta:
-        model = Post
-        fields = ['slug', 'position', 'description', 'apply_url', 'apply_email', 'location', 'type', 'status',
-                  'is_featured', 'pub_date', 'post_url', 'company', 'tags']

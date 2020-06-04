@@ -1,4 +1,4 @@
-Merhaba {{ first_name }} {{ last_name }}
+Merhaba {{ company }}
 Kayıt işlemleriniz başarı ile gerçekleştirildi. Aşağıdaki üyelik onay linkine tıklayarak aktivasyon işleminizi gerçekleştirebilirsiniz.
 https://kodilan.com/register/activation?code={{ code }}
 

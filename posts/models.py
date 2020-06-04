@@ -20,7 +20,7 @@ class Company(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
