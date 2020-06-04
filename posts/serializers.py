@@ -11,8 +11,8 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
     slug = serializers.CharField(read_only=True)
     logo = serializers.CharField(required=True, max_length=190)
     www = serializers.URLField(required=True, max_length=190)
-    twitter = serializers.CharField(required=True, max_length=190)
-    linkedin = serializers.CharField(required=True, max_length=190)
+    twitter = serializers.CharField(required=False, max_length=190)
+    linkedin = serializers.CharField(required=False, max_length=190)
 
     class Meta:
         model = Company

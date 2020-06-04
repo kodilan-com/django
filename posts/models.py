@@ -10,8 +10,8 @@ class Company(models.Model):
     email = models.EmailField()
     logo = models.ImageField(upload_to='uploads/')
     www = models.URLField()
-    twitter = models.CharField(max_length=15)
-    linkedin = models.URLField()
+    twitter = models.CharField(null=True, max_length=15)
+    linkedin = models.URLField(null=True,)
     pub_date = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

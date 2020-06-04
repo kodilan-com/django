@@ -11,3 +11,5 @@ django-filters
 django-redirect-to-non-www
 django-rest-framework
 djangorestframework-simplejwt
+pyyaml
+uritemplate
