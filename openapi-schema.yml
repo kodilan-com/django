@@ -1,0 +1,537 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /tags/:
+    get:
+      operationId: listTags
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          maxLength: 190
+                        slug:
+                          type: string
+                          readOnly: true
+          description: ''
+  /companies/:
+    get:
+      operationId: listCompanys
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          maxLength: 190
+                        slug:
+                          type: string
+                          readOnly: true
+                        logo:
+                          type: string
+                          maxLength: 190
+                        www:
+                          type: string
+                          format: uri
+                          maxLength: 190
+                          pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        twitter:
+                          type: string
+                          maxLength: 190
+                        linkedin:
+                          type: string
+                          maxLength: 190
+                      required:
+                      - name
+                      - logo
+                      - www
+          description: ''
+  /posts/:
+    get:
+      operationId: listPosts
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: tags
+        required: false
+        in: query
+        description: tags
+        schema:
+          type: string
+      - name: type
+        required: false
+        in: query
+        description: type
+        schema:
+          type: string
+      - name: position
+        required: false
+        in: query
+        description: position
+        schema:
+          type: string
+      - name: is_featured
+        required: false
+        in: query
+        description: is_featured
+        schema:
+          type: string
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        slug:
+                          type: string
+                          readOnly: true
+                        position:
+                          type: string
+                          maxLength: 190
+                        description:
+                          type: string
+                          maxLength: 100000
+                          minLength: 4
+                        apply_url:
+                          type: string
+                          format: uri
+                          maxLength: 190
+                          pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                            s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                            .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                            .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                            -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                            .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                            .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                        apply_email:
+                          type: string
+                          format: email
+                          maxLength: 190
+                        location:
+                          type: string
+                          maxLength: 190
+                        type:
+                          enum:
+                          - !!python/object/apply:posts.models.TypeEnum
+                            - 1
+                          - !!python/object/apply:posts.models.TypeEnum
+                            - 2
+                          - !!python/object/apply:posts.models.TypeEnum
+                            - 3
+                          - !!python/object/apply:posts.models.TypeEnum
+                            - 4
+                        status:
+                          type: string
+                          readOnly: true
+                        is_featured:
+                          type: boolean
+                        pub_date:
+                          type: string
+                          readOnly: true
+                        post_url:
+                          type: string
+                          readOnly: true
+                        company:
+                          properties:
+                            name:
+                              type: string
+                              maxLength: 190
+                            slug:
+                              type: string
+                              readOnly: true
+                            logo:
+                              type: string
+                              maxLength: 190
+                            www:
+                              type: string
+                              format: uri
+                              maxLength: 190
+                              pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                                s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\\
+                                .(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\\
+                                .]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                                -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                                .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                                .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                            twitter:
+                              type: string
+                              maxLength: 190
+                            linkedin:
+                              type: string
+                              maxLength: 190
+                          required:
+                          - name
+                          - logo
+                          - www
+                          type: object
+                        tags:
+                          type: array
+                          items:
+                            properties:
+                              name:
+                                type: string
+                                maxLength: 190
+                              slug:
+                                type: string
+                                readOnly: true
+                      required:
+                      - position
+                      - description
+                      - apply_url
+                      - apply_email
+                      - location
+                      - type
+                      - is_featured
+                      - company
+          description: ''
+  /locations/:
+    get:
+      operationId: listFindLocationActions
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+  /posts/add:
+    post:
+      operationId: CreatePost
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                position:
+                  type: string
+                  maxLength: 190
+                description:
+                  type: string
+                  maxLength: 100000
+                  minLength: 4
+                apply_url:
+                  type: string
+                  format: uri
+                  maxLength: 190
+                  pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                    d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                    [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                    -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                    -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                    d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                apply_email:
+                  type: string
+                  format: email
+                  maxLength: 190
+                location:
+                  type: string
+                  maxLength: 190
+                type:
+                  enum:
+                  - !!python/object/apply:posts.models.TypeEnum
+                    - 1
+                  - !!python/object/apply:posts.models.TypeEnum
+                    - 2
+                  - !!python/object/apply:posts.models.TypeEnum
+                    - 3
+                  - !!python/object/apply:posts.models.TypeEnum
+                    - 4
+                is_featured:
+                  type: boolean
+                company:
+                  properties:
+                    name:
+                      type: string
+                      maxLength: 190
+                    slug:
+                      type: string
+                      readOnly: true
+                    logo:
+                      type: string
+                      maxLength: 190
+                    www:
+                      type: string
+                      format: uri
+                      maxLength: 190
+                      pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                        d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                        [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                        -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                        .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                        .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                    twitter:
+                      type: string
+                      maxLength: 190
+                    linkedin:
+                      type: string
+                      maxLength: 190
+                  required:
+                  - name
+                  - logo
+                  - www
+                  type: object
+                tags:
+                  type: array
+                  items:
+                    properties:
+                      name:
+                        type: string
+                        maxLength: 190
+                      slug:
+                        type: string
+                        readOnly: true
+              required:
+              - position
+              - description
+              - apply_url
+              - apply_email
+              - location
+              - type
+              - is_featured
+              - company
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  slug:
+                    type: string
+                    readOnly: true
+                  position:
+                    type: string
+                    maxLength: 190
+                  description:
+                    type: string
+                    maxLength: 100000
+                    minLength: 4
+                  apply_url:
+                    type: string
+                    format: uri
+                    maxLength: 190
+                    pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\\
+                      d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}|\\\
+                      [[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1\
+                      -\uFFFF0-9])?(?:\\.(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\\
+                      .(?!-)(?:[a-z\xA1-\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\\
+                      .?|localhost))(?::\\d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                  apply_email:
+                    type: string
+                    format: email
+                    maxLength: 190
+                  location:
+                    type: string
+                    maxLength: 190
+                  type:
+                    enum:
+                    - !!python/object/apply:posts.models.TypeEnum
+                      - 1
+                    - !!python/object/apply:posts.models.TypeEnum
+                      - 2
+                    - !!python/object/apply:posts.models.TypeEnum
+                      - 3
+                    - !!python/object/apply:posts.models.TypeEnum
+                      - 4
+                  status:
+                    type: string
+                    readOnly: true
+                  is_featured:
+                    type: boolean
+                  pub_date:
+                    type: string
+                    readOnly: true
+                  post_url:
+                    type: string
+                    readOnly: true
+                  company:
+                    properties:
+                      name:
+                        type: string
+                        maxLength: 190
+                      slug:
+                        type: string
+                        readOnly: true
+                      logo:
+                        type: string
+                        maxLength: 190
+                      www:
+                        type: string
+                        format: uri
+                        maxLength: 190
+                        pattern: "^(?:[a-z0-9\\.\\-\\+]*)://(?:[^\\s:@/]+(?::[^\\\
+                          s:@/]*)?@)?(?:(?:25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(?:\\.(?:25[0-5]|2[0-4]\\\
+                          d|[0-1]?\\d?\\d)){3}|\\[[0-9a-f:\\.]+\\]|([a-z\xA1-\uFFFF\
+                          0-9](?:[a-z\xA1-\uFFFF0-9-]{0,61}[a-z\xA1-\uFFFF0-9])?(?:\\\
+                          .(?!-)[a-z\xA1-\uFFFF0-9-]{1,63}(?<!-))*\\.(?!-)(?:[a-z\xA1\
+                          -\uFFFF-]{2,63}|xn--[a-z0-9]{1,59})(?<!-)\\.?|localhost))(?::\\\
+                          d{2,5})?(?:[/?#][^\\s]*)?\\Z"
+                      twitter:
+                        type: string
+                        maxLength: 190
+                      linkedin:
+                        type: string
+                        maxLength: 190
+                    required:
+                    - name
+                    - logo
+                    - www
+                    type: object
+                  tags:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          maxLength: 190
+                        slug:
+                          type: string
+                          readOnly: true
+                required:
+                - position
+                - description
+                - apply_url
+                - apply_email
+                - location
+                - type
+                - is_featured
+                - company
+          description: ''
