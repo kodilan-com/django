@@ -13,3 +13,4 @@ django-rest-framework
 djangorestframework-simplejwt
 pyyaml
 uritemplate
+django-material-admin

@@ -42,3 +42,7 @@ urlpatterns = [
     ), name='docs-redoc'),
     path('admin/', admin.site.urls),
 ]
+
+admin.site.site_header = "Kodilan Admin"
+admin.site.site_title = "Kodilan Api"
+admin.site.index_title = "Welcome to Kodilan Researcher Admin"

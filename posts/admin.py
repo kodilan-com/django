@@ -3,18 +3,19 @@ from django.contrib import admin
 from .models import Company, Post, Tag
 from django.utils.html import format_html
 from django.urls import reverse
+from datetime import datetime
 
 
 def make_published(modeladmin, request, queryset):
-    queryset.update(status=1)
+    queryset.update(status=1, pub_date=datetime.now())
 
 
 def make_unpublished(modeladmin, request, queryset):
-    queryset.update(status=2)
+    queryset.update(status=2, pub_date=None)
 
 
 def make_disapproved(modeladmin, request, queryset):
-    queryset.update(status=0)
+    queryset.update(status=0, pub_date=None)
 
 
 make_unpublished.short_description = "Mark posts stories as unpublished"
