@@ -83,6 +83,14 @@ class PostSerializer(serializers.ModelSerializer):
         return post
 
 
+class LocationSerializer(serializers.ModelSerializer):
+    location = serializers.CharField(required=True, max_length=190)
+
+    class Meta:
+        model = Post
+        fields = ('location',)
+
+
 class ActivatePostSerializer(serializers.ModelSerializer):
     status = serializers.SerializerMethodField()
 

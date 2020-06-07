@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'material.admin',
     'material.admin.default',
-    'posts.apps.PostsConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,11 +41,14 @@ INSTALLED_APPS = [
     # 3rd party
     'rest_framework',
     'django_filters',
+    'corsheaders',
     # Local
-    'kodilan'
+    'kodilan',
+    'posts.apps.PostsConfig'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +59,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'kodilan.urls'
+
+
+CORS_ORIGIN_WHITELIST = (
+    'https://kodilan.com',
+    'http://kodilan.com',
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost:8081',
+    'http://localhost:8080',
+)
 
 TEMPLATES = [
     {

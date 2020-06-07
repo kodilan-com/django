@@ -31,15 +31,26 @@ def make_disapproved(modeladmin, request, queryset):
     queryset.update(status=0, pub_date=None)
 
 
+def make_featured(modeladmin, request, queryset):
+    queryset.update(is_featured=True)
+
+
+def make_not_featured(modeladmin, request, queryset):
+    queryset.update(is_featured=False)
+
+
 make_unpublished.short_description = "Mark posts stories as unpublished"
 make_published.short_description = "Mark posts stories as published"
 make_disapproved.short_description = "Mark posts stories as disapproved"
 
+make_featured.short_description = "Mark posts stories as featured"
+make_not_featured.short_description = "Mark posts stories as featured"
+
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'slug', 'position', 'detail', 'location', 'status', 'pub_date')
+    list_display = ('id', 'slug', 'position', 'is_featured', 'detail', 'location', 'status', 'pub_date')
     list_filter = (ActivationFilter, 'status', 'position')
-    actions = [make_published, make_unpublished, make_disapproved]
+    actions = [make_published, make_unpublished, make_disapproved, make_featured, make_not_featured]
 
 
 admin.site.register(Company)

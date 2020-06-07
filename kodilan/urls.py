@@ -24,12 +24,13 @@ from rest_framework.renderers import JSONOpenAPIRenderer
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('tags/', views.TagsView.as_view()),
-    path('companies/', views.CompaniesView.as_view()),
-    path('posts/', views.PostsView.as_view()),
+    path('tags', views.TagsView.as_view()),
+    path('companies', views.CompaniesView.as_view()),
+    path('posts', views.PostsView.as_view()),
+    path('posts/slug/<slug:slug>', views.PostView.as_view()),
     path('posts/add', views.CreatePostsView.as_view()),
     path('posts/activation/<slug:activation_code>', views.ActivatePostView.as_view()),
-    path('locations/', views.FindLocationAction.as_view()),
+    path('locations', views.FindLocationAction.as_view()),
     path('', include(router.urls)),
     path('schema', get_schema_view(
         title="Kodilan",
@@ -37,7 +38,7 @@ urlpatterns = [
         version="0.0.0",
         renderer_classes=[JSONOpenAPIRenderer]
     ), name='docs-schema'),
-    path('redoc/', TemplateView.as_view(
+    path('redoc', TemplateView.as_view(
         template_name='redoc.html',
         extra_context={'schema_url': 'docs-schema'}
     ), name='docs-redoc'),

@@ -1,7 +1,5 @@
 from .models import Post, Company, Tag
-from .serializers import PostSerializer, CompanySerializer, TagSerializer, ActivatePostSerializer
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from .serializers import PostSerializer, CompanySerializer, TagSerializer, ActivatePostSerializer, LocationSerializer
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -21,9 +19,16 @@ class PostsView(ListAPIView):
     serializer_class = PostSerializer
     filter_backends = [StatusFilterBackend, PeriodFilterBackend, DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['tags', 'type', 'position', 'is_featured']
-    search_fields = ['is_featured', 'location', 'type', 'position', 'tags']
+    filterset_fields = ['tags', 'type', 'position', 'location', 'is_featured']
+    search_fields = ['position', 'description']
     ordering_fields = ['pub_date', 'created_at']
+
+
+class PostView(RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = "slug"
+    filter_backends = [StatusFilterBackend]
 
 
 class CreatePostsView(CreateAPIView):
@@ -44,10 +49,7 @@ class TagsView(ListAPIView):
     search_fields = ['name']
 
 
-class FindLocationAction(APIView):
-    def get(self, request):
-        locations = Post.objects.all().distinct('location')
-        data = {}
-        for location in locations:
-            data[location.id] = location.location
-        return Response(data)
+class FindLocationAction(ListAPIView):
+    queryset = Post.objects.all().values('location').distinct()
+    filter_backends = [StatusFilterBackend]
+    serializer_class = LocationSerializer

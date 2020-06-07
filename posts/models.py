@@ -47,7 +47,7 @@ class Post(models.Model):
 
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
-    slug = models.SlugField(null=True)
+    slug = models.SlugField(null=True, unique=True)
     position = models.CharField(max_length=200)
     description = models.TextField()
     apply_url = models.URLField(null=True, blank=True)
