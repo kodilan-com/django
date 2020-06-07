@@ -5,9 +5,9 @@ class Company(models.Model):
     class Meta:
         verbose_name_plural = "companies"
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(null=True)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     logo = models.ImageField(upload_to='uploads/')
     www = models.URLField()
     twitter = models.CharField(null=True, max_length=15)

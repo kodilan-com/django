@@ -28,6 +28,7 @@ urlpatterns = [
     path('companies/', views.CompaniesView.as_view()),
     path('posts/', views.PostsView.as_view()),
     path('posts/add', views.CreatePostsView.as_view()),
+    path('posts/activation/<slug:activation_code>', views.ActivatePostView.as_view()),
     path('locations/', views.FindLocationAction.as_view()),
     path('', include(router.urls)),
     path('schema', get_schema_view(

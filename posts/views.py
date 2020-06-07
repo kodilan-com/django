@@ -1,8 +1,8 @@
 from .models import Post, Company, Tag
-from .serializers import PostSerializer, CompanySerializer, TagSerializer
+from .serializers import PostSerializer, CompanySerializer, TagSerializer, ActivatePostSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import PeriodFilterBackend, StatusFilterBackend
@@ -29,6 +29,12 @@ class PostsView(ListAPIView):
 class CreatePostsView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class ActivatePostView(RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = ActivatePostSerializer
+    lookup_field = "activation_code"
 
 
 class TagsView(ListAPIView):
