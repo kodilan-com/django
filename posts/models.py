@@ -67,6 +67,3 @@ class Post(models.Model):
 
     def detail(self):
         return f"{self.company.id} > {self.company.name}"
-
-    def post_url(self):
-        return f"http://localhost:8000/posts/{self.id}"

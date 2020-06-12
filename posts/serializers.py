@@ -44,11 +44,17 @@ class PostSerializer(serializers.ModelSerializer):
 
     company = CompanySerializer()
     tags = TagSerializer(many=True, required=False)
+    post_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
         fields = ('slug', 'position', 'description', 'apply_url', 'apply_email', 'location', 'type', 'status',
                   'is_featured', 'pub_date', 'post_url', 'company', 'tags')
+
+    def get_post_url(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(f"/posts/slug/{obj.slug}")
+
 
     def create(self, validated_data):
 
