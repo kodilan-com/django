@@ -20,7 +20,6 @@ def do_mail(email, title, theme, variables):
     pass
 
 
-# todo: create post will update
-def send_activation(email, first_name, last_name, token):
+def send_activation(email, company, token):
     do_mail(email, "İlan Onay", "activation",
-            {'first_name': first_name, 'last_name': last_name, 'code': token})
+            {'company': company, 'code': token})
