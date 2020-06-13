@@ -35,15 +35,15 @@ class Tag(models.Model):
 class Post(models.Model):
 
     class TypeEnum(models.IntegerChoices):
-        FULLTIME = 1, 'TAM ZAMANLI'
-        PARTTIME = 2, 'YARI ZAMANLI'
-        TRAINEE = 3, 'STAJYER'
-        FREELANCER = 4, 'FREELANCE'
+        FULLTIME = 1, 'Full Time'
+        PARTTIME = 2, 'Part Time'
+        TRAINEE = 3, 'Trainee'
+        FREELANCER = 4, 'Freelancer'
 
     class StatusEnum(models.IntegerChoices):
-        DISAPPROVED = 0, 'ONAYLANMADI'
-        APPROVED = 1, 'ONAYLANDI'
-        UNPUBLISHED = 2, 'YAYINLANMADI'
+        DISAPPROVED = 0, 'Disapproved'
+        APPROVED = 1, 'Approved'
+        UNPUBLISHED = 2, 'Unpublished'
 
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)

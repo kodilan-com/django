@@ -1,6 +1,6 @@
 from .models import Post, Company, Tag
 from .serializers import PostSerializer, CompanySerializer, TagSerializer, ActivatePostSerializer, LocationSerializer
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, CreateAPIView, RetrieveAPIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import PeriodFilterBackend, StatusFilterBackend
@@ -14,7 +14,7 @@ class CompaniesView(ListAPIView):
     ordering_fields = ['id', 'name', 'created_at']
 
 
-class PostsView(ListAPIView):
+class PostsView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = [StatusFilterBackend, PeriodFilterBackend, DjangoFilterBackend,
@@ -29,11 +29,6 @@ class PostView(RetrieveAPIView):
     serializer_class = PostSerializer
     lookup_field = "slug"
     filter_backends = [StatusFilterBackend]
-
-
-class CreatePostsView(CreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
 
 
 class ActivatePostView(RetrieveAPIView):
